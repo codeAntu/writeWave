@@ -53,7 +53,6 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
-    return null;
   }
 
   async logOut() {
@@ -64,3 +63,5 @@ export class AuthService {
     }
   }
 }
+
+export const authService = new AuthService();
