@@ -1,7 +1,6 @@
 import conf from "@/conf/conf";
 import { Client, Account, ID } from "appwrite";
-import { error } from "console";
-import { SrvRecord } from "dns";
+
 
 export class AuthService {
   clint = new Client();

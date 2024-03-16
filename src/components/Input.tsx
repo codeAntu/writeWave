@@ -34,7 +34,7 @@ export default function Input({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={`${className} p-4 rounded-xl border-none bg-white/5 pl-6 text-sm tracking-[1px] outline-none`}
+      className={`${className} p-[1.2rem] p- rounded-xl border-none bg-white/10 pl-6 text-sm tracking-[1px] outline-none`}
       ref={inputRef}
       onKeyDown={onKeyDown}
     />

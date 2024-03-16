@@ -1,8 +1,7 @@
 import conf from "@/conf/conf";
 import { Client, Databases, ID, Query } from "appwrite";
-import { Database } from "lucide-react";
 
-class Service {
+export class Service {
   clint = new Client();
   databases;
   bucket;
@@ -53,13 +52,11 @@ class Service {
       content,
       featuredImg,
       status,
-      userId,
     }: {
       title: string;
       content: string;
       featuredImg: string;
       status: string;
-      userId: string;
     }
   ) {
     try {
@@ -89,7 +86,6 @@ class Service {
       return true;
     } catch (error) {
       throw error;
-      return false;
     }
   }
 

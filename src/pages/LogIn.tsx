@@ -12,36 +12,39 @@ import { BellIcon, CheckIcon } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import { useState } from "react";
 import Input from "@/components/Input";
-
-const notifications = [
-  {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
-  },
-  {
-    title: "You have a new message!",
-    description: "1 hour ago",
-  },
-  {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
-  },
-];
+import { authService } from "@/appWrite/auth";
+import { useStore } from "@/store/store";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function LogIn() {
   const controls = useAnimation();
-  const [isClicked, setIsClicked] = useState(true);
+  const [errors, setErrors] = useState("");
+  const login = useStore((state) => state.login);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-    controls.start({ x: isClicked ? 0 : 100 });
+  const logIn = async (data: { email: string; password: string }) => {
+    setErrors("");
+    try {
+      const session = await authService.logIn(data);
+      if (session) {
+        const user = await authService.getCurrentUser();
+        if (user) {
+          login(true, user);
+          navigate("/");
+        }
+      }
+    } catch (error: any) {
+      setErrors(error.message);
+    }
   };
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
       <Card
         className={cn(
-          "w-[380px] rounded-2xl border-white/20 border-2 shadow-2xl shadow-white/15 "
+          "max-w-[380px] w-[90%] rounded-2xl border-white/20 border-2 shadow-2xl shadow-white/15 "
         )}
       >
         <CardHeader className="opacity-85">
@@ -50,7 +53,13 @@ export default function LogIn() {
         </CardHeader>
         <CardContent className="grid gap-3">
           <div className="opacity-75 pl-1.5"> Email</div>
-          <Input type="email" placeholder="email" className="rounded-xl" />
+          <Input
+            type="email"
+            placeholder="email"
+            className="rounded-xl"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <div></div>
 
           <div className="opacity-75 pl-1.5">Password</div>
@@ -58,14 +67,35 @@ export default function LogIn() {
             type="Password"
             placeholder="Password"
             className="rounded-xl"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="flex justify-between text-white/40 text-[13px] px-2 pt-1">
             <a href="">Forget Password</a>
             <a href="">Create an Account</a>
           </div>
         </CardContent>
-        <CardFooter>
-          <Button>Log In</Button>
+        <div className="p-2">
+          {errors && (
+            <p className="text-red-500 text-center text-xs">{errors}</p>
+          )}
+        </div>
+        <CardFooter className="gap-4 flex-col">
+          <Button
+            onClick={() => {
+              logIn({ email, password });
+            }}
+          >
+            Log In
+          </Button>
+          <Button
+            className="bg-transparent border-2 border-white/20 p-3.5 text-white/70  "
+            onClick={() => {
+              navigate("/createAccount");
+            }}
+          >
+            Create An Account
+          </Button>
         </CardFooter>
       </Card>
     </div>

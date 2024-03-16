@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   return (
     <motion.button
       className={cn(
-        `button-full highlight-none w-full max-w-lg cursor-pointer select-none rounded-xl bg-accent p-4 text-center text-sm text-white ${className}`
+        `button-full highlight-none w-full max-w-lg cursor-pointer select-none rounded-xl bg-accent p-4 text-center text-sm text-white  ${className}`
       )}
       whileTap={{ scale: 0.98 }}
       whileHover={{ scale: 1.02 }}

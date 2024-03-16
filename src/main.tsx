@@ -7,11 +7,13 @@ import CreateAccount from "./pages/CreateAccount.tsx";
 import { Router } from "lucide-react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.tsx";
+import AddPost from "./pages/AddPost.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home  />,
+    // element: <Home  />,
+    element: <AddPost />,
   },
   {
     path: "/login",
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
     path: "/createAccount",
     element: <CreateAccount />,
   },
+  {},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
