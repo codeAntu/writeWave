@@ -23,6 +23,7 @@ export default function CreateAccount() {
   const [error, setError] = useState("");
   const login = useStore((state) => state.login);
   const navigate = useNavigate();
+  const user = useStore((state) => state.userData);
 
   const createAccount = async (data: {
     email: string;
@@ -31,8 +32,6 @@ export default function CreateAccount() {
   }) => {
     if (!email || !name || !password) {
       setError("Invalid Input");
-      console.log(data);
-
       return;
     } else {
       try {
@@ -40,7 +39,7 @@ export default function CreateAccount() {
         if (session) {
           const user = await authService.getCurrentUser();
           if (user) {
-            login(true, user);
+            login(user);
             navigate("/");
           }
         }
@@ -49,6 +48,10 @@ export default function CreateAccount() {
       }
     }
   };
+
+
+  console.log("user", user);
+  
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
@@ -93,7 +96,7 @@ export default function CreateAccount() {
         <CardFooter className="gap-4 flex-col">
           <Button
             onClick={() => {
-              createAccount({ email, name, password });
+              createAccount({ email, password, name });
             }}
           >
             Create Account

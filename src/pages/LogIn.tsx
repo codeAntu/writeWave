@@ -29,9 +29,12 @@ export default function LogIn() {
     try {
       const session = await authService.logIn(data);
       if (session) {
+        console.log("session" ,session);
+        
         const user = await authService.getCurrentUser();
         if (user) {
-          login(true, user);
+          console.log("user" ,user);
+          login(user);
           navigate("/");
         }
       }
@@ -39,6 +42,8 @@ export default function LogIn() {
       setErrors(error.message);
     }
   };
+
+  
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">

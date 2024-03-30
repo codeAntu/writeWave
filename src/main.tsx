@@ -12,8 +12,8 @@ import AddPost from "./pages/AddPost.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <Home  />,
-    element: <AddPost />,
+    element: <Home  />,
+    // element: <AddPost />,
   },
   {
     path: "/login",

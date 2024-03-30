@@ -4,7 +4,7 @@ import { create } from "zustand";
 export interface Store {
   status: boolean;
   userData: {};
-  login: (status: boolean, userData: {}) => void;
+  login: (userData: {}) => void;
   logout: () => void;
 }
 
