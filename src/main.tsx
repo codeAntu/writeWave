@@ -13,7 +13,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home  />,
-    // element: <AddPost />,
   },
   {
     path: "/login",

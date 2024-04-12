@@ -88,7 +88,7 @@ export default function LogIn() {
         <CardFooter className="gap-4 flex-col">
           <Button
             onClick={() => {
-              logIn({ email, password });
+              // logIn({ email, password });
             }}
           >
             Log In

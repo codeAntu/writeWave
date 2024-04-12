@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-VariableFont_wght.ttf") format("woff2");
+  font-weight: 1 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  font-family: "Montserrat";
+}
+
+@layer components {
+  .screen {
+    @apply flex justify-center w-full bg-white  text-black dark:bg-black dark:text-white;
+  }
+  .maxWith {
+    @apply max-w-[400px] min-h-[100dvh] w-full p-5;
+  }
+  .heading {
+    @apply text-2xl font-bold text-accent sticky top-0;
+  }
+}

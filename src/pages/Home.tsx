@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "@/components/Button";
 import Protected from "@/components/Protected";
 import { useStore } from "@/store/store";
+import LogIn from "./LogIn";
 
 export default function Home() {
   const user = useStore((state) => state.userData);
@@ -9,15 +10,17 @@ export default function Home() {
   console.log("user", user);
 
   return (
-    <Protected authentication={true}>
-      <div className="h-[100dvh] flex justify-center items-center gap-5">
-        <Link to="/login">
-          <Button>Go to Log In</Button>
-        </Link>
-        <Link to="/createAccount">
-          <Button>Go to Create Account</Button>
-        </Link>
+    <div className="screen">
+      <div className="maxWith ">
+        <div className="heading">WriteWave</div>
+        <div className="sub-heading">
+          Write your thoughts and share with the world
+        </div>
       </div>
-    </Protected>
+    </div>
   );
 }
+
+// <Protected authentication={true}>
+
+// </Protected>

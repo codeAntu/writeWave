@@ -96,7 +96,7 @@ export default function CreateAccount() {
         <CardFooter className="gap-4 flex-col">
           <Button
             onClick={() => {
-              createAccount({ email, password, name });
+              // createAccount({ email, password, name });
             }}
           >
             Create Account
