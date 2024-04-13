@@ -7,102 +7,121 @@ import Nav from "@/components/Nav";
 import Service from "@/appWrite/config";
 import { getHeapCodeStatistics } from "v8";
 import { ls } from "@/lib/ls";
+import { Post } from "@/lib/types";
+import { ExternalLink, Heart, MessageSquare, Plus } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Home() {
   const user = useStore((state) => state.userData);
   const logOut = useStore((state) => state.logout);
+  const posts = useStore((state) => state.posts);
+  const setPosts = useStore((state) => state.setPosts);
 
   console.log("user");
   console.log(user);
-
-  // console.log("Service", Service);
+  console.log("posts");
+  console.log(posts);
+  console.log(typeof posts);
 
   const getPosts = async () => {
     try {
       const posts = await Service.getPosts();
+      setPosts(posts.documents as Post[]);
       console.log("posts get ", posts);
     } catch (error) {
       console.log("error", error);
     }
   };
 
-  const createPost = async (user: any) => {
-    try {
-      const post = await Service.createPost({
-        title: "Text 02",
-        slag: Math.random().toString(36).substring(7),
-        content: "content Hello World",
-        status: "status 1",
-        userId: user.$id,
-      });
-      console.log("post cre", post);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-
-  // console.log("create", createPost);
-  // console.log("Get", getPosts);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <Protected authentication={true}>
       <div className="screen">
-        <Nav />
-        <Button onClick={getPosts}>Get Posts</Button>
-        <Button onClick={() => createPost(user)}>Create Post</Button>
-        <Button
-          onClick={() => {
-            logOut();
-          }}
-        >
-          Clear
-        </Button>
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
+        <div className="header">
+          <div>WriteWave</div>
+          <div className="headerImgContainer">
+            <img src="./vite.svg" alt="" />
           </div>
-          Button
         </div>
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
+        <div className="maxWith">
+          <AddPostButton />
+          <div className="posts py-5">
+            {posts.map((post) => {
+              return <PostUi post={post} key={post.$id} />;
+            })}
           </div>
-          B
-        </div>{" "}
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
+          <div className="posts py-5">
+            {posts.map((post) => {
+              return <PostUi post={post} key={post.$id} />;
+            })}
           </div>
-        </div>{" "}
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
+          <div className="posts py-5">
+            {posts.map((post) => {
+              return <PostUi post={post} key={post.$id} />;
+            })}
           </div>
-        </div>{" "}
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
-          </div>
-        </div>{" "}
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
-          </div>
-        </div>{" "}
-        <div className="maxWith ">
-          <div className="heading">WriteWave</div>
-          <div className="sub-heading">
-            Write your thoughts and share with the world
+          <div className="posts py-5">
+            {posts.map((post) => {
+              return <PostUi post={post} key={post.$id} />;
+            })}
           </div>
         </div>
       </div>
     </Protected>
+  );
+}
+
+function PostUi({ post }: { post: Post }) {
+  return (
+    <div className="postContainer">
+      <div className="postAuthor">
+        <img src="./vite.svg" alt="" className="postAuthorImg" />
+        <div className="flex flex-col gap-0">
+          <div className="postAuthorName">Code Antu</div>
+          <div className="postDate">
+            {/* 4 Jan 2024  */}
+            {new Date(post.$createdAt)
+              .toLocaleDateString()
+              .split("/")
+              .join("-")}{" "}
+            . {new Date(post.$createdAt).toLocaleTimeString()}
+          </div>
+        </div>
+      </div>
+      <div className="post">
+        <div className="postTitle">{post.title}</div>
+        <div className="postContent">{post.content}</div>
+      </div>
+      <div className="lcsContainer">
+        <div className="lcs">
+          <Heart size={22} className="text-black/60" />
+          10
+        </div>
+        <div className="lcs">
+          <MessageSquare size={22} className="text-black/60" />
+          20
+        </div>
+        <div className="lcs">
+          <ExternalLink size={22} className="text-black/60" />
+          30
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AddPostButton() {
+  return (
+    <div className="bg-accent fixed bottom-5 right-5 rounded-full ">
+      <Link to="/addPost">
+        <div className=" p-3 aspect-square">
+          <Plus size={40} className="text-white" />
+        </div>
+      </Link>
+    </div>
   );
 }
 

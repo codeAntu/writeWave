@@ -24,3 +24,16 @@ interface Session {
   refreshToken: string;
   expiresAt: string;
 }
+
+export interface Post {
+  title: string;
+  content: string;
+  status: string;
+  userId: string;
+  $id: string;
+  $createdAt: string;
+  $updatedAt: string;
+  $permissions: any[];
+  $databaseId: string;
+  $collectionId: string;
+}

@@ -22,7 +22,10 @@ const router = createBrowserRouter([
     path: "/createAccount",
     element: <CreateAccount />,
   },
-  {},
+  {
+    path : "/addPost",
+    element : <AddPost />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
