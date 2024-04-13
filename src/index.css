@@ -16,7 +16,7 @@
 
 @layer components {
   .screen {
-    @apply flex justify-center w-full bg-white  text-black dark:bg-black dark:text-white;
+    @apply flex flex-col justify-center w-full bg-white text-black dark:bg-black dark:text-white;
   }
   .maxWith {
     @apply max-w-[400px] min-h-[100dvh] w-full p-5;

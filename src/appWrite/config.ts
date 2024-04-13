@@ -4,26 +4,24 @@ import { Client, Databases, ID, Query } from "appwrite";
 export class Service {
   clint = new Client();
   databases;
-  bucket;
+  // bucket;
 
   constructor() {
     this.clint.setEndpoint(conf.appWriteURL).setProject(conf.appWriteProjectID);
     this.databases = new Databases(this.clint);
-    this.bucket = new Storage();
+    // this.bucket = new Storage();
   }
 
   async createPost({
     title,
     slag,
     content,
-    featuredImg,
     status,
     userId,
   }: {
     title: string;
     slag: string;
     content: string;
-    featuredImg: string;
     status: string;
     userId: string;
   }) {
@@ -35,7 +33,6 @@ export class Service {
         {
           title,
           content,
-          featuredImg,
           status,
           userId,
         }
@@ -106,36 +103,36 @@ export class Service {
       return await this.databases.listDocuments(
         conf.appWriteDatabaseID,
         conf.appWriteCollectionID,
-        query.map((q) => q.toString()) // Convert Query objects to strings
+        // query.map((q) => q.toString()) // Convert Query objects to strings
       );
     } catch (error) {
       throw error;
     }
   }
 
-  async uploadFile(file: any) {
-    try {
-      return await this.bucket.createFile(
-        conf.appWriteBucketID,
-        ID.unique(),
-        file
-      );
-    } catch (error) {
-      throw error;
-    }
-  }
+  // async uploadFile(file: any) {
+  //   try {
+  //     return await this.bucket.createFile(
+  //       conf.appWriteBucketID,
+  //       ID.unique(),
+  //       file
+  //     );
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
-  async deleteFile(fileId: string) {
-    try {
-      return await this.bucket.deleteFile(conf.appWriteBucketID, fileId);
-    } catch (error) {
-      throw error;
-    }
-  }
+  // async deleteFile(fileId: string) {
+  //   try {
+  //     return await this.bucket.deleteFile(conf.appWriteBucketID, fileId);
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
-  getFilePreview(fileId: string) {
-    return this.bucket.getFilePreview(conf.appWriteBucketID, fileId);
-  }
+  // getFilePreview(fileId: string) {
+  //   return this.bucket.getFilePreview(conf.appWriteBucketID, fileId);
+  // }
 }
 
 const service = new Service();

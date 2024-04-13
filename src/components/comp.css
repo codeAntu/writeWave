@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .nav {
+    @apply fixed bottom-0 bg-accent w-full p-5;
+  }
+}

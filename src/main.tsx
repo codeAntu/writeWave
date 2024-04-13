@@ -12,7 +12,7 @@ import AddPost from "./pages/AddPost.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home  />,
+    element: <Home />,
   },
   {
     path: "/login",
@@ -28,5 +28,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    {/* <Home /> */}
   </React.StrictMode>
 );
