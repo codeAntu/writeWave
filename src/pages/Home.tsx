@@ -6,11 +6,15 @@ import LogIn from "./LogIn";
 import Nav from "@/components/Nav";
 import Service from "@/appWrite/config";
 import { getHeapCodeStatistics } from "v8";
+import { ls } from "@/lib/ls";
 
 export default function Home() {
   const user = useStore((state) => state.userData);
+  const logOut = useStore((state) => state.logout);
 
-  console.log("user", user);
+  console.log("user");
+  console.log(user);
+
   // console.log("Service", Service);
 
   const getPosts = async () => {
@@ -21,7 +25,6 @@ export default function Home() {
       console.log("error", error);
     }
   };
-  
 
   const createPost = async (user: any) => {
     try {
@@ -47,11 +50,19 @@ export default function Home() {
         <Nav />
         <Button onClick={getPosts}>Get Posts</Button>
         <Button onClick={() => createPost(user)}>Create Post</Button>
+        <Button
+          onClick={() => {
+            logOut();
+          }}
+        >
+          Clear
+        </Button>
         <div className="maxWith ">
           <div className="heading">WriteWave</div>
           <div className="sub-heading">
             Write your thoughts and share with the world
           </div>
+          Button
         </div>
         <div className="maxWith ">
           <div className="heading">WriteWave</div>
