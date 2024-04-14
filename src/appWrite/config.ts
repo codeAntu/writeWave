@@ -1,15 +1,15 @@
 import conf from "@/conf/conf";
-import { Client, Databases, ID, Query } from "appwrite";
+import { Client, Databases, ID, Query, Storage } from "appwrite";
 
 export class Service {
   clint = new Client();
   databases;
-  // bucket;
+  bucket;
 
   constructor() {
     this.clint.setEndpoint(conf.appWriteURL).setProject(conf.appWriteProjectID);
     this.databases = new Databases(this.clint);
-    // this.bucket = new Storage();
+    this.bucket = new Storage(this.clint);
   }
 
   async createPost({
@@ -110,29 +110,29 @@ export class Service {
     }
   }
 
-  // async uploadFile(file: any) {
-  //   try {
-  //     return await this.bucket.createFile(
-  //       conf.appWriteBucketID,
-  //       ID.unique(),
-  //       file
-  //     );
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async uploadFile(file: any) {
+    try {
+      return await this.bucket.createFile(
+        conf.appWriteBucketID,
+        ID.unique(),
+        file
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
 
-  // async deleteFile(fileId: string) {
-  //   try {
-  //     return await this.bucket.deleteFile(conf.appWriteBucketID, fileId);
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async deleteFile(fileId: string) {
+    try {
+      return await this.bucket.deleteFile(conf.appWriteBucketID, fileId);
+    } catch (error) {
+      throw error;
+    }
+  }
 
-  // getFilePreview(fileId: string) {
-  //   return this.bucket.getFilePreview(conf.appWriteBucketID, fileId);
-  // }
+  getFilePreview(fileId: string) {
+    return this.bucket.getFilePreview(conf.appWriteBucketID, fileId);
+  }
 }
 
 const service = new Service();

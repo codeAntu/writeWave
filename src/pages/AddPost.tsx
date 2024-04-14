@@ -12,7 +12,7 @@ export default function AddPost() {
   const [content, setContent] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const user = useStore((state) => state.userData);
-
+  const [file, setFile] = useState<File | null>(null);
 
   const createPost = async (
     user: User,
@@ -35,6 +35,15 @@ export default function AddPost() {
         userId: user.$id,
       });
       console.log("post cre", post);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const uploadImage = async (file: File) => {
+    try {
+      const image = await Service.uploadFile(file);
+      console.log("image", image);
     } catch (error) {
       console.log("error", error);
     }
@@ -83,8 +92,15 @@ export default function AddPost() {
               />
             </div>
           </div>
+
+          <input
+            type="file"
+            name=""
+            id=""
+            onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+          />
         </div>
-        <div className="pt-10">
+        <div className="pt-10 flex flex-col gap-2">
           <Button
             onClick={() =>
               createPost(user, {
@@ -92,16 +108,13 @@ export default function AddPost() {
                 content,
                 status,
               })
-              
             }
           >
             <span>ADD POST</span>
           </Button>
-        </div>
-        <div>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam
-          impedit adipisci laboriosam, nulla at vitae reiciendis. Aliquid modi
-          veritatis doloremque.
+          <Button onClick={() => file && uploadImage(file)}>
+            <span>Upload Image</span>
+          </Button>
         </div>
       </div>
     </Protected>

@@ -33,6 +33,15 @@ export default function Home() {
     }
   };
 
+  const file = async () => {
+    try {
+      const file = await Service.getFilePreview("");
+      console.log("file", file);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
   useEffect(() => {
     getPosts();
   }, []);
