@@ -103,7 +103,7 @@ export class Service {
       return await this.databases.listDocuments(
         conf.appWriteDatabaseID,
         conf.appWriteCollectionID,
-        // query.map((q) => q.toString()) // Convert Query objects to strings
+        query.map((q) => q.toString()) // Convert Query objects to strings
       );
     } catch (error) {
       throw error;
