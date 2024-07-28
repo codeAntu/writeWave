@@ -10,6 +10,7 @@ import { ls } from "@/lib/ls";
 import { Post } from "@/lib/types";
 import { ExternalLink, Heart, MessageSquare, Plus } from "lucide-react";
 import { useEffect } from "react";
+import LogOut from "./logOut";
 
 export default function Home() {
   const user = useStore((state) => state.userData);
@@ -54,6 +55,7 @@ export default function Home() {
           <div className="headerImgContainer">
             <img src="./vite.svg" alt="" />
           </div>
+          <LogOut />
         </div>
         <div className="maxWith">
           <AddPostButton />
