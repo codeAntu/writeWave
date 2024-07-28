@@ -18,10 +18,10 @@ export default function LogOut() {
     }
   };
 
+
   return (
     <div>
-      <h1>LogOut</h1>
-      <button onClick={logout}>LogOut</button>
+      <button onClick={logOut}>LogOut</button>
     </div>
   );
 }

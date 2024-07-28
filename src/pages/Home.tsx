@@ -47,6 +47,8 @@ export default function Home() {
     getPosts();
   }, []);
 
+
+
   return (
     <Protected authentication={true}>
       <div className="screen">

@@ -10,11 +10,12 @@ import {
 import { cn } from "@/lib/utils";
 import { BellIcon, CheckIcon } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "@/components/Input";
 import { authService } from "@/appWrite/auth";
 import { useStore } from "@/store/store";
 import { Navigate, useNavigate } from "react-router-dom";
+import LogOut from "./logOut";
 
 export default function LogIn() {
   const controls = useAnimation();
@@ -42,6 +43,15 @@ export default function LogIn() {
       setErrors(error.message);
     }
   };
+
+  const user = async () => {
+    const user = await authService.getCurrentUser();
+    console.log("user", user);
+  };
+
+  useEffect(() => {
+    user();
+  }, []);
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
@@ -100,6 +110,7 @@ export default function LogIn() {
             Create An Account
           </Button>
         </CardFooter>
+        <LogOut />
       </Card>
     </div>
   );
