@@ -46,7 +46,7 @@ export default function LogIn() {
   localStorage.clear();
 
   return (
-    <Protected  authentication = {false}>
+    <Protected authentication={false}>
       <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
         <Card
           className={cn(

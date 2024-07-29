@@ -11,6 +11,7 @@ import { Post } from "@/lib/types";
 import { ExternalLink, Heart, MessageSquare, Plus } from "lucide-react";
 import { useEffect } from "react";
 import LogOut from "./logOut";
+import { authService } from "@/appWrite/auth";
 
 export default function Home() {
   const user = useStore((state) => state.userData);
@@ -18,11 +19,7 @@ export default function Home() {
   const posts = useStore((state) => state.posts);
   const setPosts = useStore((state) => state.setPosts);
 
-  console.log("user");
-  console.log(user);
-  console.log("posts");
-  console.log(posts);
-  console.log(typeof posts);
+
 
   const getPosts = async () => {
     try {
@@ -42,6 +39,16 @@ export default function Home() {
       console.log("error", error);
     }
   }
+
+  // const currUser = async  () => {
+  //   try {
+  //     const user = await authService.getCurrentUser();
+  //     console.log("user", user);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  
+  // }
 
   useEffect(() => {
     getPosts();
