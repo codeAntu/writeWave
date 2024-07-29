@@ -44,14 +44,7 @@ export default function LogIn() {
     }
   };
 
-  // const user = async () => {
-  //   const user = await authService.getCurrentUser();
-  //   console.log("user", user);
-  // };
 
-  // useEffect(() => {
-  //   user();
-  // }, []);
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
@@ -110,7 +103,6 @@ export default function LogIn() {
             Create An Account
           </Button>
         </CardFooter>
-        <LogOut />
       </Card>
     </div>
   );
