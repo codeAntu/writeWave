@@ -44,14 +44,14 @@ export default function LogIn() {
     }
   };
 
-  const user = async () => {
-    const user = await authService.getCurrentUser();
-    console.log("user", user);
-  };
+  // const user = async () => {
+  //   const user = await authService.getCurrentUser();
+  //   console.log("user", user);
+  // };
 
-  useEffect(() => {
-    user();
-  }, []);
+  // useEffect(() => {
+  //   user();
+  // }, []);
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
