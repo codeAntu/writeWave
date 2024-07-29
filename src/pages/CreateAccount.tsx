@@ -10,11 +10,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useStore } from "@/store/store";
 import { useNavigate } from "react-router-dom";
 import { log } from "console";
 import { ChevronsLeftRightIcon } from "lucide-react";
+import LogOut from "./logOut";
 
 export default function CreateAccount() {
   const [email, setEmail] = useState("");
@@ -50,11 +51,25 @@ export default function CreateAccount() {
   };
 
 
+  const currUser = async () => {
+    const user = await authService.getCurrentUser();
+    console.log("user", user);
+  }
+
+  useEffect(() => {
+    currUser();
+  }
+  , []);
+
+
+
+
   console.log("user", user);
   
 
   return (
     <div className="w-full h-[100dvh] flex justify-center items-center bg-black text-white">
+      {/* <LogOut /> */}
       <Card
         className={cn(
           "w-[380px] rounded-2xl border-white/20 border-2 shadow-2xl shadow-white/15 m-2"
